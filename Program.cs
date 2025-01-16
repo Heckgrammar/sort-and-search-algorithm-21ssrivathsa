@@ -4,26 +4,7 @@ namespace compare_algorithm
 {
     internal class Program
     {
-        static void Main(string[] args)
-        {
-            Random n = new Random();
-            Stopwatch sw = new Stopwatch();
 
-
-        }
-        static int[] CreateArray(int size, Random r)
-        {
-            
-        }
-        static void menu()
-        {
-
-        }
-        
-        static void BubbleSort(int[] a)
-        {
-            
-        }
         static void Merge(int[] a, int low, int mid, int high)
         {
             int i, j, k;
@@ -65,9 +46,11 @@ namespace compare_algorithm
             while (j < num2)
             {
                 a[k] = R[j];
-                j++; k++;
+                j++;
+                k++;
             }
         }
+
         static void MergeSortRecursive(int[] a, int low, int high)
         {
             if (low < high)
@@ -78,14 +61,61 @@ namespace compare_algorithm
                 Merge(a, low, mid, high);
             }
         }
-        static bool LinearSearch(int[] a, int numToFind)
+        static int[] CreateArray(int size, Random r)
+        {
+            int[] array = new int[size];
+            foreach (int i in array)
+            {
+                array[i] = r.Next(1,10000);
+            }
+            return array;
+        }
+
+        static void menu()
         {
 
         }
+
+        static void BubbleSort(int[] a)
+        {
+
+        }
+
+        static bool LinearSearch(int[] a, int numToFind)
+        {
+            bool found = false;
+            int foundCount = 0;
+            foreach (int i in a)
+            {
+                if (a[i] == numToFind)
+                { 
+                    found = true;
+                    foundCount++;
+                }
+            }
+            
+            return found;
+        }
+
         static bool BinarySearch(int[] a, int numToFind)
         {
-            
+            bool found = false;
+            return found;
         }
-            
+
+        static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            Stopwatch sw = new Stopwatch();
+            Console.WriteLine("How many numbers would you like in your array?");
+            int size = Convert.ToInt32(Console.ReadLine());
+            int[] numbers = CreateArray(size, rnd);
+            foreach (int i in numbers)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+
     }
 }
