@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection.Emit;
 
 namespace compare_algorithm
 {
@@ -64,15 +65,21 @@ namespace compare_algorithm
         static int[] CreateArray(int size, Random r)
         {
             int[] array = new int[size];
-            foreach (int i in array)
-            {
-                array[i] = r.Next(1,10000);
+            //foreach (int i in array)
+            for (int i = 0; i < size; i++)
+                {
+                array[i] = r.Next(1, 10000);
             }
             return array;
         }
-
         static void menu()
         {
+            Console.WriteLine("what would you like to do?");
+            Console.WriteLine("1: Linear Search");
+            Console.WriteLine("2: Binary Search");
+            Console.WriteLine("3: Bubble Sort");
+            Console.WriteLine("4: Merge Sort");
+            Console.WriteLine("9: Quit");
 
         }
 
@@ -84,22 +91,25 @@ namespace compare_algorithm
         static bool LinearSearch(int[] a, int numToFind)
         {
             bool found = false;
-            int foundCount = 0;
-            foreach (int i in a)
+            for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] == numToFind)
                 { 
                     found = true;
-                    foundCount++;
                 }
             }
-            
             return found;
         }
 
         static bool BinarySearch(int[] a, int numToFind)
         {
             bool found = false;
+            int lowerBound = 0;
+            int upperBound = a.GetLength(0) - 1 ;
+            while (lowerBound != upperBound || found == false)
+            { 
+
+            }
             return found;
         }
 
@@ -109,10 +119,50 @@ namespace compare_algorithm
             Stopwatch sw = new Stopwatch();
             Console.WriteLine("How many numbers would you like in your array?");
             int size = Convert.ToInt32(Console.ReadLine());
-            int[] numbers = CreateArray(size, rnd);
-            foreach (int i in numbers)
+            int[] array = CreateArray(size, rnd);
+            foreach (int i in array)
             {
                 Console.WriteLine(i);
+            }
+            int choice = 0;
+            while (choice != 9 || choice != 1 || choice != 2 || choice != 3 || choice != 4)
+            {
+                menu();
+                Console.WriteLine("enter the number of your choice:");
+                choice = Convert.ToInt32(Console.ReadLine());
+                if (choice == 9)
+                {
+                    System.Environment.Exit(0);
+                }
+                else if (choice == 1)
+                {
+                    Console.WriteLine("what number would you like to find");
+                    int numToFind = Convert.ToInt32(Console.ReadLine());
+                    bool found = LinearSearch(array, numToFind);
+                    if (found == true)
+                    {
+                        Console.WriteLine($"{numToFind} was found in the array");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{numToFind} was not found in the array");
+                    }
+                }
+                else if(choice == 2)
+                {
+                    Console.WriteLine("what number would you like to find");
+                    int numToFind = Convert.ToInt32(Console.ReadLine());
+                    bool found = LinearSearch(array, numToFind);
+                    BinarySearch(array, numToFind);
+                }
+                else if(choice == 3)
+                {
+                    BubbleSort(array);
+                }
+                //else if (choice == 4)
+                //{
+                //    MergeSortRecursive(array, );
+                //}
             }
         }
 
