@@ -65,9 +65,8 @@ namespace compare_algorithm
         static int[] CreateArray(int size, Random r)
         {
             int[] array = new int[size];
-            //foreach (int i in array)
             for (int i = 0; i < size; i++)
-                {
+            {
                 array[i] = r.Next(1, 10000);
             }
             return array;
@@ -83,9 +82,29 @@ namespace compare_algorithm
 
         }
 
-        static void BubbleSort(int[] a)
+        static int[] BubbleSort(int[] a)
         {
+            int temp;
+            int changes;
+            do
+            {
+                temp = 0;
+                changes = 0;
+                for (int i = 0;i < a.GetLength(0) - 1;i++)
+                {
+                    if (a[i] > a[i + 1])
+                    {
+                        a[i + 1] = temp;
+                        a[i + 1] = a[i];
+                        a[i] = temp;
+                        changes++;
+                    }
+                    else { }
+                }
 
+            }
+            while (changes > 0);
+            return a;
         }
 
         static bool LinearSearch(int[] a, int numToFind)
@@ -103,14 +122,26 @@ namespace compare_algorithm
 
         static bool BinarySearch(int[] a, int numToFind)
         {
-            bool found = false;
             int lowerBound = 0;
             int upperBound = a.GetLength(0) - 1 ;
-            while (lowerBound != upperBound || found == false)
+            int mid = 0;
+            while (lowerBound != upperBound)
             { 
-
+                mid = (lowerBound + upperBound) / 2;
+                if (a[mid] == numToFind)
+                {
+                    return true;
+                }
+                else if (a[mid] <  numToFind)
+                {
+                    lowerBound = mid+1;
+                }
+                else
+                {
+                    upperBound = mid-1;
+                }
             }
-            return found;
+            return false;
         }
 
         static void Main(string[] args)
@@ -152,18 +183,32 @@ namespace compare_algorithm
                 {
                     Console.WriteLine("what number would you like to find");
                     int numToFind = Convert.ToInt32(Console.ReadLine());
-                    bool found = LinearSearch(array, numToFind);
-                    BinarySearch(array, numToFind);
+                    //array = MergeSortRecursive(array, );
+                    bool found = BinarySearch(array, numToFind);
+                    if (found == true)
+                    {
+                        Console.WriteLine($"{numToFind} was found in the array");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{numToFind} was not found in the array");
+                    }
                 }
                 else if(choice == 3)
                 {
-                    BubbleSort(array);
+                    array = BubbleSort(array);
+                    foreach (int i in array)
+                    {
+                        Console.WriteLine(i);
+                    }
                 }
-                //else if (choice == 4)
-                //{
-                //    MergeSortRecursive(array, );
-                //}
+                else if (choice == 4)
+                {
+                    MergeSortRecursive(array, array[0], array[array.Length-1]);
+                }
+
             }
+            Console.WriteLine("finshed");
         }
 
 
