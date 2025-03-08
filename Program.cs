@@ -88,9 +88,10 @@ namespace compare_algorithm
             int changes = 1;
             while (changes != 0)
             {
+                changes = 0;
                 for (int i = 0;i < a.Length-1;i++)
                 { 
-                    if (a[i] < a[i +1])
+                    if (a[i] > a[i +1])
                     {
                         temp = a[i+1];
                         a[i+1] = a[i];
