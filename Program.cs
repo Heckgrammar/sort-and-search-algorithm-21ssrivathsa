@@ -85,25 +85,20 @@ namespace compare_algorithm
         static int[] BubbleSort(int[] a)
         {
             int temp;
-            int changes;
-            do
+            int changes = 1;
+            while (changes != 0)
             {
-                temp = 0;
-                changes = 0;
-                for (int i = 0;i < a.GetLength(0) - 1;i++)
-                {
-                    if (a[i] > a[i + 1])
+                for (int i = 0;i < a.Length-1;i++)
+                { 
+                    if (a[i] < a[i +1])
                     {
-                        a[i + 1] = temp;
-                        a[i + 1] = a[i];
+                        temp = a[i+1];
+                        a[i+1] = a[i];
                         a[i] = temp;
                         changes++;
                     }
-                    else { }
                 }
-
             }
-            while (changes > 0);
             return a;
         }
 
@@ -183,7 +178,6 @@ namespace compare_algorithm
                 {
                     Console.WriteLine("what number would you like to find");
                     int numToFind = Convert.ToInt32(Console.ReadLine());
-                    //array = MergeSortRecursive(array, );
                     bool found = BinarySearch(array, numToFind);
                     if (found == true)
                     {
